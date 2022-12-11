@@ -1,4 +1,3 @@
-{PowerStripProperties:{
-reloadStack.livecodescript:true
+{PowerStripProperties:
 }
 }
