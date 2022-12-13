@@ -79,16 +79,6 @@ on revIDECreateObject pObjectTypeID, pTarget, pLoc
          # A classic control
          do "create" && tObjectType
          put the long ID of the last control into tCreatedControlID
-         
-         #         local tObjectNumber, tObjectName
-         #         set the itemDelimiter to "."
-         #         put 1 into tObjectNumber
-         #         put item -1 of tObjectType & tObjectNumber into tObjectName
-         #         repeat while there is a control tObjectName
-         #            add 1 to tObjectNumber
-         #            put item -1 of tObjectType & tObjectNumber into tObjectName
-         #         end repeat
-         #         set the name of the last control to tObjectName
       end if
       
       put sClassicObjectProperties[pObjectTypeID]["properties"] into tObjPropsA
