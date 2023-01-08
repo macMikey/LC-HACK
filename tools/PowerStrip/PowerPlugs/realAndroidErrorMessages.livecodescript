@@ -5,91 +5,34 @@
 */
 
 local sOriginalHandlerArray
-constant kHandlers = "deployGetVersionsMap,deployIsValidJDK,deployIsValidSDK,deployAutoconfigure"
+local sOriginalSaveAs
+constant kHandlers = "deployIsValidJDK,deployIsValidSDK,deployAutoconfigure"
 constant kConstant1 = "constant kDeployAndroidTargetSDK"
 constant kObject = "stack revdeploylibraryandroid" # object whose script contains the handlers
 
+constant kSaveAs = "revSaveAsMobileStandalone"  # may already be updated in later versions
+constant kObject2 = "stack revSaveAsAndroidStandalone" # object whose script contains the handler
+
 command initializePlugin
-   local tText # the text of the replacement handler
-   repeat for each item tPatch in kHandlers
-      dispatch function "originalPlugPatch" to stack "PowerStrip" with kObject, tPatch
-      put the result into sOriginalHandlerArray[tPatch]
-      
-      dispatch function "originalPlugPatch" to stack "PowerStrip" with me, tPatch
-      put the result into tText
-      dispatch "monkeyPatch" to stack "PowerStrip" with  kObject, tPatch, tText
-   end repeat
-   
-   #   put the script of kObject into tText
-   #   local tPosition, tTargetVersion
-   #   put lineoffset ("constant kDeployAndroidTargetSDK", tText) into tPosition
-   #   filter tText with "constant kDeployAndroidTargetSDK*" into tTargetVersion
-   #   local tTarget
-   #   put word -1 of line 1 of tTargetVersion into tTarget
-   #   if tTarget < 30 then
-   #      breakpoint
-   #      put "constant kDeployAndroidTargetSDK =" && q(31) into line tPosition of tText
-   #      dispatch "setScriptOf" to stack "PowerStrip" with kObject, tText
-   #   end if
-   dispatch "replaceConstant" to stack "PowerStrip" with kObject, kConstant1, 30, 31
+    repeat for each item tPatch in kHandlers
+        dispatch function "initializeHandler" to stack "PowerStrip" with tPatch, kObject, the name of me
+        put the result into sOriginalHandlerArray[tPatch]
+    end repeat
+    dispatch "replaceConstant" to stack "PowerStrip" with kObject, kConstant1, 30, 31
+    dispatch function "initializeHandler" to stack "PowerStrip" with kSaveAs, kObject2, the name of me
+    put the result into sOriginalSaveAs
 end initializePlugin
-
-#command replaceConstant pObject, pConstantDeclaration, pOldValue, pNewValue
-#   local tText
-#   local tPosition, tTargetVersion
-
-#   put the script of pObject into tText
-#   put lineoffset (pConstantDeclaration, tText) into tPosition
-#   filter tText with pConstantDeclaration&"*" into tTargetVersion
-#   --if word -1 of tTargetVersion is not pOldValue then
-#   if shouldReplace?(word -1 of tTargetVersion, pOldValue) then
-#      put pConstantDeclaration && "=" && q(pNewValue) into line tPosition of tText
-#      dispatch "setScriptOf" to stack "PowerStrip" with pObject, tText
-#   end if
-#end replaceConstant
-
-#function shouldReplace? pOldValue, pNewValue
-#   local tShouldReplace?
-
-#   put false into tShouldReplace?
-#   if pOldValue is a number then
-#      if pNewValue > pOldValue then
-#         put true into tShouldReplace?
-#      end if
-#   else
-#      if pOldValue is not pNewValue then
-#         put true into tShouldReplace?
-#      end if
-#   end if
-#   return tShouldReplace?
-#end shouldReplace?
-
 
 command removePlugin
     repeat for each key tPatch in sOriginalHandlerArray
         dispatch "monkeyPatch" to stack "PowerStrip" with kObject, tPatch, sOriginalHandlerArray[tPatch]
     end repeat
+    dispatch "monkeyPatch" to stack "PowerStrip" with kObject2, kSaveAs, sOriginalSaveAs
 end removePlugin
 
 # have to do this manually:
 # make sure the target SDK is *at least* 30
 constant kDeployAndroidTargetSDK = "30" # mdw 2022.04.20
-
-function deployGetVersionsMap
-   local tMap
-   put "5.0 - Lollipop" into tMap[21]
-   put "5.1" into tMap[22]
-   put "6.0 - Marshmallow" into tMap[23]
-   put "7.0 - Nougat" into tMap[24]
-   put "7.1" into tMap[25]
-   put "8.0 - Oreo" into tMap[26]
-   put "8.1" into tMap[27]
-   put "9.0 - Pie" into tMap[28]
-   put "10 - Q" into tMap[29]
-   put "11 - R" into tMap[30]
-   put "12 - API 31" into tMap[31]
-   return tMap
-end deployGetVersionsMap
 
 function deployIsValidJDK pPath
    if there is no folder pPath then
@@ -169,4 +112,71 @@ command deployAutoconfigure
       end if
    end if
 end deployAutoconfigure
+
+command revSaveAsMobileStandalone \
+      pStack, \
+      pAabFile, \
+      pTarget, \
+      pSettings, \
+      @xStandalonePaths, \
+      pDevice
+
+   local tPath
+   local tErrorMessage
+   put the cMobileSupport["android.sdk"] of stack "revPreferences" into tPath
+   
+   if tPath is empty then
+      throw revIDELocalise("In order to build Android standalones" & \ 
+            " you need to choose the location of your Android development SDK" & \
+            " in Preferences -> Mobile Support")
+   end if
+   put revIDEDeployAndroidIsValidSDK(tPath) into tErrorMessage
+   if tErrorMessage is not empty then # now returns an error string
+      throw revIDELocalise("The chosen folder in Preferences -> Mobile Support" & \
+            " is not a valid Android SDK because" && tErrorMessage & ". " &\
+            "Please ensure you have installed it correctly," & \
+            " and enabled support for") && revIDEDeployAndroidRequiredSDK()
+   end if
+   
+   local tTargetType
+   if pTarget contains "build" then
+      put "android release" into tTargetType
+   else
+      put "android test" into tTargetType
+   end if
+
+   local tPackage
+   put pAabFile into tPackage
+   if not pSettings["android,use bundle"] then
+      set the itemDelimiter to "."
+      put "apk" into the last item of tPackage
+      set the itemDelimiter to ","
+   end if
+
+   try
+      put the cMobileSupport["android.jdk"] of stack "revPreferences" into sJavaRoot
+      dispatch "savingMobileStandalone" to stack pStack with tTargetType, tPackage
+   end try
+   
+   try
+      revSaveAsMobileStandaloneMain \
+         pStack, \
+         pAabFile, \
+         pTarget, \
+         pSettings, \
+         pDevice
+   catch tError
+   end try
+   
+   try
+      if tError is not empty then
+         put empty into tPackage
+      end if
+      dispatch "mobileStandaloneSaved" to stack pStack with tTargetType, tPackage
+   end try
+   
+   if tError is not empty then
+      throw tError
+   end if
+end revSaveAsMobileStandalone
 

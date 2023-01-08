@@ -4,13 +4,14 @@ PowerStrip is a plugin to allow patching a LiveCode installation on IDE startup.
 The individual patches are in a PowerPlugs folder in the same folder as the plugin.
 Enabling and disabling patches is done through the PowerStrip plugin:
   the list of PowerPlugs is initialized when the plugin starts up
-  clicking on a line in the list will toggle whether it is enabled at IDE launch.
+  clicking on a line in the list will toggle whether it is enabled at plugin launch.
+  The enabled PowerPlugs are stored as json objects in PowerPlugs.txt.
 
 From the docs (and the stack script header)
 
 /*
 * PowerStrip
-* mark wieder and ah,software 2021
+* mark wieder and ah,software 2023
 *
 * PowerStrip is an umbrella for patches to system IDE scripts.
 
@@ -32,13 +33,13 @@ local sOriginalBehavior
 local kObject = "stack revIDEProjectBrowser"
 
 command initializePlugin
-   put the behavior of kObject into sOriginalBehavior
-   set the behavior of this me to the long id of stack "revPaletteBehavior"
-   set the behavior of kObject to me  
+    put the behavior of kObject into sOriginalBehavior
+    set the behavior of this me to the long id of stack "revPaletteBehavior"
+    set the behavior of kObject to me  
 end initializePlugin
 
 command removePlugin
-   send "restoreBehavior kObject, sOriginalBehavior" to stack "PowerStrip" in 0 milliseconds
+    send "restoreBehavior kObject, sOriginalBehavior" to stack "PowerStrip" in 0 milliseconds
 end removePlugin
 
 Example constructor and destructor from tsNetEditionType.livecodescript:
@@ -49,13 +50,8 @@ constant kHandler = "ulExtIsBlocked"  # the name of the handler to replace
 constant kObject = "stack tsNetLibUrl"
 
 command initializePlugin
-    local tText # the text of the replacement handler
-    dispatch function "originalPlugPatch" to stack "PowerStrip" with kObject, kHandler
-    put the result into sOriginalHandler
-
-    dispatch function "originalPlugPatch" to stack "PowerStrip" with me, kHandler
-    put the result into tText
-    send "monkeyPatch stack tsNetLibUrl, kHandler, tText" to stack "PowerStrip" in 0 milliseconds
+    dispatch function "initializeHandler" to stack "PowerStrip" with kHandler, kObject, the name of me
+    put the result into sOriginalAutoconfigure
 end initializePlugin
 
 command removePlugin
