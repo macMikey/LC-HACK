@@ -20,10 +20,10 @@ end removePlugin
 # Here's the replacement function:
 
 function ulExtIsBlocked
-   if the editionType is "commercial" then
+   #if the editionType is "professional" then
       return false
-   else
-      return tsNetIsSyncBlocked()
-   end if
+   #else
+      #return tsNetIsSyncBlocked()
+   #end if
 end ulExtIsBlocked
 

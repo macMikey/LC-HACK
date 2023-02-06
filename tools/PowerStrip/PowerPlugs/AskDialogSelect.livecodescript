@@ -1,4 +1,4 @@
-script "ASKDialog.livecodescript"
+script "ASKDialogSelect.livecodescript"
 
 /*
 * select the text

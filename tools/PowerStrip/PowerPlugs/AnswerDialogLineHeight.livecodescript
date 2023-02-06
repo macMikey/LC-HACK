@@ -1,4 +1,4 @@
-script "AnswerDialog.livecodescript"
+script "AnswerDialogLineHeight.livecodescript"
 
 /*
 * set fixedLineHeight false
