@@ -1,7 +1,9 @@
 ﻿script "revIDEClearPaletteRects.livecodescript"
 
 /*
-* fix for bugzilla #23399
+* fix for bugzilla #21976
+*
+* there are many unnecessary rect custom properties in preferences stack
 */
 
 local sOriginalHandler

@@ -1,7 +1,7 @@
 script "AnswerDialogCopyText.livecodescript"
 
 /*
-* select the displayed text
+* Since there's currently no way to select the text in a modal dialog
 */
 
 local sOriginalHandler

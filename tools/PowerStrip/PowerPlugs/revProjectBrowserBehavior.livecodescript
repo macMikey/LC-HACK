@@ -1,6 +1,8 @@
 script "revProjectBrowserBehavior.livecodescript"
 
-# start PowerStrip handlers
+/*
+* Bernd Niggemann's patch for the IDE's Project Browser
+*/
 local sOriginalBehavior
 local kObject = "stack revIDEProjectBrowser"
 

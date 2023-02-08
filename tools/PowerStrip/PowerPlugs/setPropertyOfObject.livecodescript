@@ -2,6 +2,8 @@ script "setPropertyOfObject.livecodescript"
 
 /*
 * fix for bugzilla #23252
+*
+* Allow a player object to be dragged from the tools palette
 */
 
 local sOriginalHandler

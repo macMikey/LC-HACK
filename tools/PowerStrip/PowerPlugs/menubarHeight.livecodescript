@@ -2,6 +2,9 @@ script "menubarHeight.livecodescript"
 
 /*
 * fix for bugzilla #16880
+*
+* If you disable both menubar icons and text LC hangs.
+* Fix this by adjusting the minimum height
 */
 
 local sOriginalHandler

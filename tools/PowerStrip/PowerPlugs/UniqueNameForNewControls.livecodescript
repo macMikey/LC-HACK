@@ -2,6 +2,8 @@ script "UniqueNameForNewControls.livecodescript"
 
 /*
 * fix for bugzilla #21631
+*
+* Allow each new control to have a unique name
 */
 
 local sOriginalHandler

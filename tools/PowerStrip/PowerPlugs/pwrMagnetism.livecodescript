@@ -1,6 +1,9 @@
 ﻿script "pwrMagnetism.livecodescript"
+
 /**
 * pwrMagnetism
+*
+* Provides a mechanism for stacks to dock to each other
 */
 
 local sDockedArray

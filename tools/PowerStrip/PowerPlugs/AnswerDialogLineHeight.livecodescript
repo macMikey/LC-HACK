@@ -1,7 +1,7 @@
 script "AnswerDialogLineHeight.livecodescript"
 
 /*
-* set fixedLineHeight false
+* set fixedLineHeight false in the Answer dialog
 */
 
 local sOriginalHandler

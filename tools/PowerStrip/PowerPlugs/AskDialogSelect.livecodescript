@@ -1,7 +1,7 @@
 script "ASKDialogSelect.livecodescript"
 
 /*
-* select the text
+* select the text in an Ask dialog
 */
 
 local sOriginalHandler
