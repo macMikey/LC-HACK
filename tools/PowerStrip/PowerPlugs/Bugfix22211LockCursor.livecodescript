@@ -1,4 +1,4 @@
-script "LockCursorBugfix22211.livecodescript"
+script "Bugfix22211LockCursor.livecodescript"
 
 /*
 * fix for bug #22211

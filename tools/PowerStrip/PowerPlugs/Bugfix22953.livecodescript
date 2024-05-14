@@ -1,4 +1,4 @@
-script "Bugfix22953.livecodescript"
+﻿script "Bugfix22953.livecodescript"
 
 /*
 * fix for bugzilla #
@@ -64,32 +64,48 @@ on resizeStack
    set the topleft of image "icon_retina" of me to tLeft,tTop
    put the right of image "icon_retina" of me + tPadding into tLeft
    set the topleft of image "icon" of me to tLeft,tTop
-
+   
    put the right of image "icon" of me + tPadding into tLeft
    set the topLeft of field "label_svgicon_absent" to tLeft, tTop
    set the topLeft of widget "svgicon_retina" of me to tLeft, tTop
    put the right of widget "svgicon_retina" of me into tLeft
    set the topLeft of widget "svgicon" of me to tLeft, tTop
-
+   
    # Resources
    put item 1 of tRect + tMargin into tLeft
    put item 3 of tRect - tMargin into tRight
-@@ -446,15 +451,15 @@ on resizeStack
+   put the bottom of image "icon_retina" of me + tPadding into tTop
+   set the width of field "label_resources" of me to tLabelWidth
+   set the topleft of field "label_resources" of me to tLeft,tTop
+   put the right of field "label_icons" of me + tPadding into tLeft
+   set the rect of field "message_api" of me to tLeft, tTop, tRight, tTop+the formattedheight of field "message_api" of me  -  (the margins of field "message_api" of me / 2)
+   
+   # Default script
+   put item 1 of tRect + tMargin into tLeft
+   put item 3 of tRect - tMargin into tRight
+   put the bottom of field "resources" of me + tPadding into tTop
+   set the width of field "label_defaultscript" of me to tLabelWidth
+   set the topleft of field "label_defaultscript" of me to tLeft,tTop
+   put the right of field "label_defaultscript" of me + tPadding into tLeft
+   set the rect of field "defaultscript" of me to tLeft,tTop,tRight, tTop+(the height of this card * 0.15)
+   set the topright of button "defaultscript_edit" of me to tRight, the bottom of field "defaultscript" of me + tPadding
+   
+   # API
+   put item 1 of tRect + tMargin into tLeft
+   put the bottom of button "defaultscript_edit" of me + tPadding into tTop
    set the width of field "label_api" of me to tLabelWidth
    set the topleft of field "label_api" of me to tLeft,tTop
    put the right of field "label_api" of me + tPadding into tLeft
    set the rect of field "message_api" of me to tLeft, tTop, tRight, tTop+the formattedheight of field "message_api" of me  -  the margins of field "message_api" of me
-   set the rect of field "message_api" of me to tLeft, tTop, tRight, tTop+the formattedheight of field "message_api" of me  -  (the margins of field "message_api" of me / 2)
-
+   
    # Guide
    put item 1 of tRect + tMargin into tLeft
    put the bottom of field "message_api" of me + tPadding into tTop
    set the width of field "label_guide" of me to tLabelWidth
    set the topleft of field "label_guide" of me to tLeft,tTop
    put the right of field "label_guide" of me + tPadding into tLeft
-   set the rect of field "message_guide" of me to tLeft, tTop, tRight, tTop+the formattedheight of field "message_guide" of me -  the margins of field "message_guide" of me
    set the rect of field "message_guide" of me to tLeft, tTop, tRight, tTop+the formattedheight of field "message_guide" of me -  (the margins of field "message_guide" of me / 2)
-
+   
    # Console
    put item 1 of tRect + tMargin into tLeft
    put the bottom of field "message_guide" of me + 2 * tPadding into tTop

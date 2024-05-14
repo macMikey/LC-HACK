@@ -1,7 +1,7 @@
 script "revProjectBrowserBehavior.livecodescript"
 
 /*
-* Bernd Niggemann's patch for the IDE's Project Browser
+* Bernd Niggemann's patches for the IDE's Project Browser
 */
 local sOriginalBehavior
 local kObject = "stack revIDEProjectBrowser"

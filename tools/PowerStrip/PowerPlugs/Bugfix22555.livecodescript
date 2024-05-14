@@ -1,4 +1,4 @@
-script "Bugfix22555.livecodescript"
+﻿script "Bugfix22555.livecodescript"
 
 /*
 * fix for bugzilla #22555
@@ -14,7 +14,7 @@ local sOriginalUpdateHandler
 # otherwise just need one of these
 
 constant kHandler = "scriptCompile"  # the name of the handler to replace
-constant kObject = "stack revseeditor" # object whose script contains the handler
+constant kObject = "stack revseeditorbehavior" # object whose script contains the handler
 
 command initializePlugin
     dispatch function "initializeHandler" to stack "PowerStrip" with kHandler, kObject, the name of me
@@ -28,6 +28,7 @@ end removePlugin
 # in order to replace a complete handler in kObject...
 
 # Here's the corrected handler:
+local sHandlerList # dummy so it will compile
 
 command scriptCompile pObject
    lock screen

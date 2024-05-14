@@ -1,4 +1,4 @@
-script "revResetAllBugfix23399.livecodescript"
+script "Bugfix23399revResetAll.livecodescript"
 
 /*
 * The resetAll command doesn't really close all sockets.

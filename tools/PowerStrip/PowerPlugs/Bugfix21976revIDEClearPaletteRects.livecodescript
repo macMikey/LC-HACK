@@ -1,4 +1,4 @@
-﻿script "revIDEClearPaletteRects.livecodescript"
+﻿script "Bugfix21976revIDEClearPaletteRects.livecodescript"
 
 /*
 * fix for bugzilla #21976

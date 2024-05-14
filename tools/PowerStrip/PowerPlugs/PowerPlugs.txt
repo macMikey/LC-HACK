@@ -1,7 +1,5 @@
 {PowerStripProperties:{
 androidConfigurationHacks.livecodescript:true,
-androidPrivateHacks.livecodescript:true,
-LockCursorBugfix22211.livecodescript:true,
-svgGradientImport.livecodescript:true
+androidPrivateHacks.livecodescript:true
 }
 }
