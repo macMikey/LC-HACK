@@ -1,8 +1,8 @@
-script "Bugfix22211LockCursor.livecodescript"
+script "Bugfix22211"
 
 /*
 * fix for bug #22211
-Toolset/libraries/revbackscriptlibrary.livecodescript
+* Remove the unnecessary "unlock cursor" in ideMouseMove
 */
 
 local sOriginalHandler

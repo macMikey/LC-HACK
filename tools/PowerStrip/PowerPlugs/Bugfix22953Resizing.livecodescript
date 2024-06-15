@@ -1,9 +1,9 @@
-﻿script "Bugfix22953.livecodescript"
+﻿script "bnBugfix22953"
 
 /*
-* fix for bugzilla #
+* fix for bugzilla #22953
 *
-* more verbose description
+* Fix some resizing issues for Extension Builder
 */
 
 local sOriginalRemove

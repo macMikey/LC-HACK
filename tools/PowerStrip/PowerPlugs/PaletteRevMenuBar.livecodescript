@@ -1,4 +1,4 @@
-script "PaletteRevMenuBar.livecodescript"
+script "PaletteRevMenuBar"
 
 /*
 * Make the menubar a palette on linux

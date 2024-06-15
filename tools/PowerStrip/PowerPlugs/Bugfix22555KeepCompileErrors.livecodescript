@@ -1,9 +1,9 @@
-﻿script "Bugfix22555.livecodescript"
+﻿script "Bugfix22555"
 
 /*
 * fix for bugzilla #22555
 *
-* more verbose description
+* If LiveError is off compile errors are not flagged if one clicks in field "script" or any other action in SE.
 */
 
 local sOriginalRemove

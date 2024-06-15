@@ -1,4 +1,4 @@
-﻿script "realAndroidErrorMessages.livecodescript"
+﻿script "realAndroidErrorMessages"
 
 /*
 * Return real error messages when configuring Android sdk and jdk

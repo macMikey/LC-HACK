@@ -1,4 +1,4 @@
-script "Bugfix16880menubarHeight.livecodescript"
+script "Bugfix16880"
 
 /*
 * fix for bugzilla #16880

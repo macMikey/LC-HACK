@@ -1,4 +1,4 @@
-script "localizeAskDialogButtons.livecodescript"
+script "localizeAskDialogButtons"
 
 /*
 * partially fixes bug 21006
@@ -7,7 +7,7 @@ script "localizeAskDialogButtons.livecodescript"
 
 local sOriginalHandler
 constant kHandler = "openStack"  # the name of the handler to replace
-constant kObject = "stack Ask Dialog" # object whose script contains the handler
+constant kObject = "/Toolset/palettes/revaskdialog.livecode" # object whose script contains the handler
 
 on openStack
    localizeOKButtonTo "Abbrechen"

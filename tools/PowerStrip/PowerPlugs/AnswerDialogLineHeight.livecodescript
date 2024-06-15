@@ -1,4 +1,4 @@
-script "AnswerDialogLineHeight.livecodescript"
+script "AnswerDialogLineHeight"
 
 /*
 * set fixedLineHeight false in the Answer dialog
@@ -6,6 +6,7 @@ script "AnswerDialogLineHeight.livecodescript"
 
 local sOriginalHandler
 constant kHandler = "dialogInitialize"  # the name of the handler to replace
+#constant kObject = "/Toolset/palettes/revanswerdialog.livecode" # object whose script contains the handler
 constant kObject = "stack Answer Dialog" # object whose script contains the handler
 
 command initializePlugin

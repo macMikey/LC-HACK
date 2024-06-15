@@ -1,4 +1,4 @@
-﻿script "androidConfigurationHacks.livecodescript"
+﻿script "androidConfigurationHacks"
 
 /*
 * provide actual error messages when attempting to create Android standalones

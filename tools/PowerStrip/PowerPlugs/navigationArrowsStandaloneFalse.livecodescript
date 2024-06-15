@@ -1,4 +1,4 @@
-script "navigationArrowsStandaloneFalse.livecodescript"
+script "navigationArrowsStandaloneFalse"
 
 /*
 * https://forums.livecode.com/viewtopic.php?f=7&t=37821&start=15

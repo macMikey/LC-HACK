@@ -1,4 +1,4 @@
-script "Bugfix21631UniqueNameForNewControls.livecodescript"
+script "Bugfix21631"
 
 /*
 * fix for bugzilla #21631

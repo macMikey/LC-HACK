@@ -1,4 +1,4 @@
-﻿script "pwrMagnetism.livecodescript"
+﻿script "pwrMagnetism"
 
 /**
 * pwrMagnetism

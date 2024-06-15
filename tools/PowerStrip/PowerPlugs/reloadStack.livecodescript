@@ -1,4 +1,4 @@
-﻿script "ReloadStack.livecodescript"
+﻿script "ReloadStack"
 
 global gREVSuppressMessages
 

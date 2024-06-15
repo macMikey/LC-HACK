@@ -1,4 +1,4 @@
-﻿script "tsNetEditionType.livecodescript"
+﻿script "tsNetEditionType"
 
 /*
 * Ensure non-blocking tsNet calls

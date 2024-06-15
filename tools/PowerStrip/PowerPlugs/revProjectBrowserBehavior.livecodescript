@@ -1,4 +1,4 @@
-script "revProjectBrowserBehavior.livecodescript"
+script "bnProjectBrowserBehavior"
 
 /*
 * Bernd Niggemann's patches for the IDE's Project Browser

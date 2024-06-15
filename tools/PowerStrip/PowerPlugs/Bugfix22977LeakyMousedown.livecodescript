@@ -1,4 +1,4 @@
-script "Bugfix22977.livecodescript"
+script "Bugfix22977"
 
 /*
 * fix the leaky mouseDown in the Ask and Answer dialogs

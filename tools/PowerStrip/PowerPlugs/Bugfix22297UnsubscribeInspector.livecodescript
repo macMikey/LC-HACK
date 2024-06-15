@@ -1,4 +1,4 @@
-script "Bugfix22297.livecodescript"
+script "Bugfix22297"
 
 /*
 * fix for bugzilla #22297

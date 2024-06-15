@@ -1,4 +1,4 @@
-script "ASKDialogSelect.livecodescript"
+script "AskDialogSelect"
 
 /*
 * select the text in an Ask dialog
@@ -6,7 +6,7 @@ script "ASKDialogSelect.livecodescript"
 
 local sOriginalHandler
 constant kHandler = "openCard"  # the name of the handler to replace
-constant kObject = "stack Ask Dialog" # object whose script contains the handler
+constant kObject = "/Toolset/palettes/revaskdialog.livecode" # object whose script contains the handler
 
 command initializePlugin
     dispatch function "initializeHandler" to stack "PowerStrip" with kHandler, kObject, the name of me

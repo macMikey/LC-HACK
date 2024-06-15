@@ -1,4 +1,4 @@
-script "editLabelText.livecodescript"
+script "editLabelText"
 
 /*
 * double-click a label field in pointer mode to edit the text
@@ -6,7 +6,7 @@ script "editLabelText.livecodescript"
 
 local sOriginalHandler
 constant kHandler = "closeField"  # the name of the handler to replace
-#constant kHandler2 = "mouseDoubleUp"  # the name of the handler to add
+constant kHandler2 = "mouseDoubleUp"  # the name of the handler to add
 constant kObject = "stack revbackscriptlibrary" # object whose script contains the handler
 
 constant kNewHandlers = "mouseDoubleUp"
@@ -16,24 +16,27 @@ command initializePlugin
     dispatch function "initializeHandler" to stack "PowerStrip" with kHandler, kObject, the name of me
     put the result into sOriginalHandler
 
+   dispatch function "initializeHandler" to stack "PowerStrip" with kHandler2, kObject, the name of me
+   put the result into tText
+
 #    dispatch function "originalPlugPatch" to stack "PowerStrip" with me, kHandler2
 #    put the result into tText
 #    dispatch "monkeyPatch" to stack "PowerStrip" with  kObject, kHandler2, tText
 
-    repeat for each item tHandler in kNewHandlers
-        dispatch function "originalPlugPatch" to stack "PowerStrip" with me, tHandler
-        put the result into tText
-        dispatch "monkeyPatch" to stack "PowerStrip" with  kObject, tHandler, tText
-    end repeat
+#    repeat for each item tHandler in kNewHandlers
+#        dispatch function "originalPlugPatch" to stack "PowerStrip" with me, tHandler
+#        put the result into tText
+#        dispatch "monkeyPatch" to stack "PowerStrip" with  kObject, tHandler, tText
+#    end repeat
 end initializePlugin
 
 command removePlugin
     dispatch "monkeyPatch" to stack "PowerStrip" with kObject, kHandler, sOriginalHandler
-#    dispatch "monkeyPatch" to stack "PowerStrip" with kObject, kHandler2, empty
+    dispatch "monkeyPatch" to stack "PowerStrip" with kObject, kHandler2, empty
 
-    repeat for each item tHandler in kNewHandlers
-        dispatch "monkeyPatch" to stack "PowerStrip" with kObject, tHandler, empty
-    end repeat
+#    repeat for each item tHandler in kNewHandlers
+#        dispatch "monkeyPatch" to stack "PowerStrip" with kObject, tHandler, empty
+#    end repeat
 end removePlugin
 
 # Here's the corrected handler:
@@ -57,7 +60,7 @@ on closeField
 end closeField
 
 on mouseDoubleUp pButtonNo, pTarget
-   global gREVSuppressMessages
+   --global gREVSuppressMessages
    local tName
 
     if the mouseControl is not empty then

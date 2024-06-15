@@ -1,4 +1,4 @@
-script "svgGradientImport.livecodescript"
+script "svgGradientImport"
 
 /*
 * https://forums.livecode.com/viewtopic.php?f=7&t=37821&start=15
@@ -10,7 +10,7 @@ script "svgGradientImport.livecodescript"
 
 local sOriginalHandler
 constant kHandler = "_svgParsePaintValue"  # the name of the handler to replace
-constant kObject = "stack com.livecode.library.drawing" # object whose script contains the handler
+constant kObject = "com.livecode.library.drawing" # object whose script contains the handler
 
 command initializePlugin
     dispatch function "initializeHandler" to stack "PowerStrip" with kHandler, kObject, the name of me

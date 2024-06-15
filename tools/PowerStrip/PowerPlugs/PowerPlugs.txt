@@ -1,5 +1,3 @@
-{PowerStripProperties:{
-androidConfigurationHacks.livecodescript:true,
-androidPrivateHacks.livecodescript:true
+{PowerStripProperties:
 }
 }
